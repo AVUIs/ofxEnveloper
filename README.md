@@ -19,6 +19,7 @@ Compatibility: openFrameworks 0.9.0
 
 #Example
 The example-scaling illustrates how a gesture can result in a scaled envelope.
+
 How to run the example:
 - Use projectGenerator to create a new project
 - Select the addons: ofxEnvRec, ofxMSACore, ofxMSAInterpolator 
