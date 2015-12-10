@@ -10,10 +10,12 @@ Possible uses:
 Compatibility: openFrameworks 0.9.0
 
 #How it works
-Once a gesture is completed, the getEnvelope() method can be executed. 
-The getPoints() method can then be used to retrieve the envelope points. 
-Gesture and interpolation can be drawn while gesture is executed. 
-The clear() method clears the envelope recognition.
+- While performing a gesture, points are added to the envelope recognition with the `push_back()` method.
+- Gesture and interpolation can be drawn while gesture is executed, using `drawGesture()` and `drawInterpolation()`. 
+- Once a gesture is completed, the `getEnvelope()` method can be executed. 
+- The `getPoints()` method can then be used to retrieve the envelope points. 
+- A `scale()` method is provided by scaling an envelope from an ofRectangle object to another.
+- The `clear()` method clears the envelope recognition.
 
 #Example
 The example-scaling illustrates how a gesture can result in a scaled envelope.
@@ -23,9 +25,9 @@ How to run the example:
 - Replace the resulting src folder with the example's src folder
 
 #Credits
-Code by Fiore Martin. Examples by Fiore Martin and Nuno Correia.
+Code by <a href="https://github.com/martinfm">Fiore Martin. Examples by <a href="https://github.com/martinfm">Fiore Martin and <a href="https://github.com/nunocorreia">Nuno Correia.
 
-EnvRec is part of the <a href="http://depic.eecs.qmul.ac.uk">DePIC</a> and <a href="http://avuis.goldsmithsdigital.com">Enabling AVUIs</a> research projects. DePIC is hosted by QMUL and funded by EPSRC. Enabling AVUIs is hosted by Goldsmiths, University of London and funded by the Marie Curie EU fellowship program.
+EnvRec is part of the <a href="http://depic.eecs.qmul.ac.uk">DePIC</a> and <a href="http://avuis.goldsmithsdigital.com">Enabling AVUIs</a> research projects. DePIC is hosted by Queen Mary, University of London and funded by EPSRC. Enabling AVUIs is hosted by Goldsmiths, University of London and funded by the Marie Curie EU fellowship program.
 
 EnvRec relies on Memo Akten’s <a href="http://www.memo.tv/ofxmsainterpolator/">ofxMSAInterpolator</a>.
 
