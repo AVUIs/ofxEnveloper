@@ -17,7 +17,9 @@ Compatibility: openFrameworks 0.9.0
 - A `scale()` method is provided by scaling an envelope from an ofRectangle object to another.
 - The `clear()` method clears the envelope recognition.
 
-#Example
+EnvRec relies on Memo Akten’s <a href="http://www.memo.tv/ofxmsainterpolator/">ofxMSAInterpolator</a>. Dependencies: <a href="https://github.com/memo/ofxMSACore">ofxMSACore</a> and <a href="https://github.com/memo/ofxMSAInterpolator">ofxMSAInterpolator</a>.
+
+#Examples
 The example-scaling illustrates how a gesture can result in a scaled envelope.
 
 How to run the example:
@@ -29,8 +31,6 @@ How to run the example:
 Code by <a href="https://github.com/martinfm">Fiore Martin</a>. Examples by <a href="https://github.com/martinfm">Fiore Martin</a> and <a href="https://github.com/nunocorreia">Nuno Correia</a>.
 
 EnvRec is part of the <a href="http://depic.eecs.qmul.ac.uk">DePIC</a> and <a href="http://avuis.goldsmithsdigital.com">Enabling AVUIs</a> research projects. DePIC is hosted by Queen Mary, University of London and funded by EPSRC. Enabling AVUIs is hosted by Goldsmiths, University of London and funded by the Marie Curie EU fellowship program.
-
-EnvRec relies on Memo Akten’s <a href="http://www.memo.tv/ofxmsainterpolator/">ofxMSAInterpolator</a>.
 
 ![ofxEnvRex screenshot](http://www.nunocorreia.com/wp-content/uploads/2015/12/EnvRec.png)
 
