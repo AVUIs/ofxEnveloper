@@ -86,16 +86,20 @@ ofxEnvRecEnvelope ofxEnvRec::getEnvelope()
     
     /* Now scan all the samples and keep track of the previous direction, namely the direction
        of the line that connects the current sample with the previous. If the direction changes
-       then pop the sample into the envelope otherwise carry on and interpolate out all the
-       samples in a line straight line. start from third samples beause the sample 0 goes in the 
-       envelope anyway. From sample 1 on, they go into the envelope when the next sample is examined
+       then pop the sample into the envelope, otherwise carry on and interpolate out all the
+       samples in a line straight line. start from third sample because the sample 0 goes in the
+       envelope anyway. From sample 1 on, the n-th sample goes into the envelope when the 
+       n+1-th sample is examined (namely when the iteration variable i is equal to n)
      */
     
     float diff_x = samples[1].x - samples[0].x;
+    
+    /* check there is no going backwards in the gesture */
     if( fabs ( diff_x ) < mVertThreshold ){
         /* snap the second point x coord to the first if close enough */
         samples[1].x = samples[0].x;
     }else if(diff_x < 0){
+        /* if the gesture goes backwards, return invalid envelope */
         return ofxEnvRecEnvelope(false);
     }
     
@@ -104,14 +108,14 @@ ofxEnvRecEnvelope ofxEnvRec::getEnvelope()
     
     for(int i=2; i< samples.size(); i++){
 
-        /* check there are no loops in the gesture */
+        /* check there is no going backwards in the gesture */
         diff_x = samples[i].x - samples[i-1].x;
         
         if( fabs(diff_x) < mVertThreshold ){
             /* snap the second point x coord to the first if close enough */
             samples[i].x = samples[i-1].x;
         }else if( diff_x < 0){
-            /* if there is a loop return invalid envelope */
+            /* if the gesture goes backwards, return invalid envelope */
             return ofxEnvRecEnvelope(false);
         }
         
