@@ -10,6 +10,7 @@ Possible uses:
 Compatibility: openFrameworks 0.9.0
 
 #How it works
+- Create an ofxEnvRec object, specifying pixel thesholds for detection of vertical and horizontal lines (default is 0).
 - While performing a gesture, points are added to the envelope recognition with the `push_back()` method.
 - Gesture and interpolation can be drawn while gesture is executed, using `drawGesture()` and `drawInterpolation()`. 
 - Once a gesture is completed, the `getEnvelope()` method can be executed. 
