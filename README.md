@@ -25,7 +25,7 @@ How to run the example:
 - Replace the resulting src folder with the example's src folder
 
 #Credits
-Code by <a href="https://github.com/martinfm">Fiore Martin. Examples by <a href="https://github.com/martinfm">Fiore Martin and <a href="https://github.com/nunocorreia">Nuno Correia.
+Code by <a href="https://github.com/martinfm">Fiore Martin</a>. Examples by <a href="https://github.com/martinfm">Fiore Martin</a> and <a href="https://github.com/nunocorreia">Nuno Correia</a>.
 
 EnvRec is part of the <a href="http://depic.eecs.qmul.ac.uk">DePIC</a> and <a href="http://avuis.goldsmithsdigital.com">Enabling AVUIs</a> research projects. DePIC is hosted by Queen Mary, University of London and funded by EPSRC. Enabling AVUIs is hosted by Goldsmiths, University of London and funded by the Marie Curie EU fellowship program.
 
