@@ -1,13 +1,13 @@
 //
-//  ofxEnvRecEnvelope.h
-//  ofxEnvRecEnvelope
+//  ofxEnveloperData.h
+//  ofxEnveloperData
 //
 //  Created by Fiore Martin on 04/12/2015.
 //
 //
 
-#ifndef ofxEnvRecEnvelope_h
-#define ofxEnvRecEnvelope_h
+#ifndef ofxEnveloperData_h
+#define ofxEnveloperData_h
 
 #include <vector>
 
@@ -15,7 +15,7 @@
 
 
 /**
- an envelope returned by ofxEnvRec. 
+ an envelope data returned by ofxEnveloper. 
  
  The envelope is represented as set of points ordered by their x coordinate.
  A valid envelope - isValid() returns true - only goes from left to right.
@@ -24,18 +24,18 @@
  point of the vector returned by getPoints() with the previous one and the next one.
  
  */
-class ofxEnvRecEnvelope {
+class ofxEnveloperData {
     
     
 public:
     
     
-    ofxEnvRecEnvelope(bool valid = true)
+    ofxEnveloperData(bool valid = true)
     {
         mValid = valid;
     }
     
-    /* whether an envelope is valid, For iunstance an invalid envelope is returned by ofxEnvRec
+    /* whether an envelope data is valid, For iunstance an invalid envelope is returned by ofxEnveloper
        to flag that a valid envelope cannot be instantiated from the gesture 
      */
     bool isValid() const
@@ -70,11 +70,11 @@ public:
     
     /**
      scales the points of the envelope passed as argument, note that this modifies
-     the envelope passed as argument. So make a copy first if you need to keep the old values as well.
+     the envelope data passed as argument. So make a copy first if you need to keep the old values as well.
      
      arguments are 
      
-     envelope: the envelope to scale, it gets modified by this function
+     envelopeData: the envelope to scale, it gets modified by this function
      origin: the rectange where the envelope was generated
      dest: the new rectangle the envelope will be fit into
      
@@ -85,7 +85,7 @@ public:
        both scaled and non-scaled points; in that case it will be marked as invalid. If you need to restore
        the original state of the envelope then make a copy before calling this method.
      */
-    static void scale(ofxEnvRecEnvelope & envelope, const ofRectangle & origin, const ofRectangle & dest);
+    static void scale(ofxEnveloperData & envelopeData, const ofRectangle & origin, const ofRectangle & dest);
     
         
     
@@ -99,4 +99,4 @@ private:
 };
 
 
-#endif /* ofxEnvRecEnvelope_h */
+#endif /* ofxEnveloperData_h */

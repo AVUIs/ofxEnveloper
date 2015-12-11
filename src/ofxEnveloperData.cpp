@@ -1,32 +1,32 @@
 //
-//  ofxEnvRecEnvelope.cpp
-//  ofxEnvRecEnvelope
+//  ofxEnveloperData.cpp
+//  ofxEnveloperData
 //
 //  Created by Fiore Martin on 04/12/2015.
 //
 //
 
-#include "ofxEnvRecEnvelope.h"
+#include "ofxEnveloperData.h"
 
 
 
-std::vector<ofxEnvRecEnvelope::Point> & ofxEnvRecEnvelope::getPoints()
+std::vector<ofxEnveloperData::Point> & ofxEnveloperData::getPoints()
 {
     return mPoints;
 };
 
-const std::vector<ofxEnvRecEnvelope::Point> & ofxEnvRecEnvelope::getPoints() const
+const std::vector<ofxEnveloperData::Point> & ofxEnveloperData::getPoints() const
 {
     return mPoints;
 };
 
-void ofxEnvRecEnvelope::scale(ofxEnvRecEnvelope & envelope, const ofRectangle & origin, const ofRectangle & dest)
+void ofxEnveloperData::scale(ofxEnveloperData & envelopeData, const ofRectangle & origin, const ofRectangle & dest)
 {
-    if(!envelope.isValid()){
+    if(!envelopeData.isValid()){
         throw std::invalid_argument( "Trying to scale an invalid envelope" );
     }
     
-    std::vector<Point> & points = envelope.getPoints();
+    std::vector<Point> & points = envelopeData.getPoints();
     
     bool validEnvelope = true;
     for( Point & p : points){
@@ -36,10 +36,10 @@ void ofxEnvRecEnvelope::scale(ofxEnvRecEnvelope & envelope, const ofRectangle & 
             /* if the exception happens after the first point, then the envelope is corrupted
                (contains both scaled and non-scaled points) so it's marked non-valid  */
             if(!validEnvelope){
-                envelope.mValid = false;
+                envelopeData.mValid = false;
             }
             
-            throw std::out_of_range("Envelope point outisde origin boundaries");
+            throw std::out_of_range("Envelope data point outisde origin boundaries");
         }
         
         validEnvelope = false;

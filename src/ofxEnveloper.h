@@ -1,23 +1,23 @@
 //
-//  ofxEnvRec.h
-//  ofxEnvRec
+//  ofxEnveloper.h
+//  ofxEnveloper
 //
 //  Created by Fiore Martin on 04/12/2015.
 //
 //
 
-#ifndef ofxEnvRec_h
-#define ofxEnvRec_h
+#ifndef ofxEnveloper_h
+#define ofxEnveloper_h
 
 
 #include <vector>
 
 #include "MSAInterpolator.h"
-#include "ofxEnvRecEnvelope.h"
+#include "ofxEnveloperData.h"
 
 
 /**
- ofxEnvRec creates smooth linear envelopes out of line-drawing like gesture.
+ ofxEnveloper creates smooth linear envelopes out of line-drawing like gesture.
  It performs a linear interpolation of a guesture with sqrt( n ) samples, where n 
  is the number of points of the drawing gesture. Then it cancels all the intermediate points
  of a set of contiguous points going in the same direction.
@@ -30,7 +30,7 @@
  
  
  */
-class ofxEnvRec {
+class ofxEnveloper {
     
     enum Direction
     {
@@ -68,7 +68,7 @@ class ofxEnvRec {
 public:
     
     /**
-     Creates a new Envelope Recognition class.
+     Creates a new ofxEnveloper class.
      
      horizontalThreshold and verticalThreshold are the the maximum distances respectively on the
      y and x axis, within which an envelope point will be snapped to the same coordinate of the previous point
@@ -81,7 +81,7 @@ public:
      or decreasing slope, will be snapped back to a vertical line going from (p1.x, p1.y) to (p1.x, p2.y).
      
      */
-    ofxEnvRec(float horizotalThreshold = 0, float verticalThreshold = 0);
+    ofxEnveloper(float horizotalThreshold = 0, float verticalThreshold = 0);
     
     inline void setHorizontalThreshold(float horizontalThreshold)
     {
@@ -125,10 +125,10 @@ public:
     void drawInterpolation();
     
     /**
-     Creates and returns a new envelope based onthe gesture currently pushed in this ofxEnvRec instance
+     Creates and returns a new envelope data based onthe gesture currently pushed in this ofxEnveloper instance
      */
-    ofxEnvRecEnvelope getEnvelope();
+    ofxEnveloperData getEnvelope();
 };
 
 
-#endif /* ofxEnvRec_h */
+#endif /* ofxEnveloper_h */

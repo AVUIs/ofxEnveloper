@@ -1,10 +1,10 @@
 //  Created by Fiore Martin and Nuno Correia on 04/12/2015.
 
 #include "ofApp.h"
-#include "ofxEnvRec.h"
+#include "ofxEnveloper.h"
 
 //create envelope recognition with pixel threshold for H and V lines
-ofxEnvRec envelopeRecognition(10, 10);
+ofxEnveloper enveloper(10, 10);
 
 //declare lines and areas
 ofPolyline inputLine;
@@ -36,10 +36,10 @@ void ofApp::draw(){
     //when input line is 0, there is no envelope, just the gesture line
     if(inputLine.size() == 0){
         //draw gesture
-        envelopeRecognition.drawGesture();
+        enveloper.drawGesture();
         //draw interpolation
         ofSetColor(0,0,255,127);
-        envelopeRecognition.drawInterpolation();
+        enveloper.drawInterpolation();
     }else{
         inputLine.draw();
     }
@@ -51,7 +51,7 @@ void ofApp::draw(){
     outputLine.draw();
     //circles
     ofSetColor(0,0,255,127);
-    for (const ofxEnvRecEnvelope::Point & p : outputCircles ){
+    for (const ofxEnveloperData::Point & p : outputCircles ){
         ofDrawCircle(p.x,p.y,10);
     }
 }
@@ -75,7 +75,7 @@ void ofApp::mouseDragged(int x, int y, int button){
     if(button == 0){
         if(x<inputArea.width&&x>inputArea.x&&y<inputArea.height&&y>inputArea.y){
             //add point to envelope recognition
-            envelopeRecognition.push_back(x, y);
+            enveloper.push_back(x, y);
         }
     }
 }
@@ -84,7 +84,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     
     //deletes the envelopes
-    envelopeRecognition.clear();
+    enveloper.clear();
     inputLine.clear();
     outputLine.clear();
     outputCircles.clear();
@@ -94,24 +94,24 @@ void ofApp::mousePressed(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
     //create an envelope object inputEnv, with the processed gesture data
-    ofxEnvRecEnvelope inputEnv = envelopeRecognition.getEnvelope();
+    ofxEnveloperData inputEnv = enveloper.getEnvelope();
     
     //the if clause is needed to make sure envelope is drawn from left to right
     if(inputEnv.isValid()){
 
         //loop goes throught the vector of input envelope points
-        for (const ofxEnvRecEnvelope::Point & p : inputEnv.getPoints() ){
+        for (const ofxEnveloperData::Point & p : inputEnv.getPoints() ){
             inputLine.addVertex(p.x, p.y);
         }
         
         //create a output envelope, at first with data from input envelope
-        ofxEnvRecEnvelope outputEnv = inputEnv;
+        ofxEnveloperData outputEnv = inputEnv;
         
         //scale the output envelope from the input area to the output area
-        ofxEnvRecEnvelope::scale(outputEnv, inputArea, outputArea);
+        ofxEnveloperData::scale(outputEnv, inputArea, outputArea);
 
         //add the points of the scaled envelope to the line
-        for (const ofxEnvRecEnvelope::Point & p : outputEnv.getPoints() ){
+        for (const ofxEnveloperData::Point & p : outputEnv.getPoints() ){
             outputLine.addVertex(p.x, p.y);
             outputCircles.push_back(p);
         }

@@ -1,15 +1,15 @@
 //
-//  ofxEnvRec.cpp
-//  ofxEnvRec
+//  ofxEnveloper.cpp
+//  ofxEnveloper
 //
 //  Created by Fiore Martin on 04/12/2015.
 //
 //
 
-#include "ofxEnvRec.h"
+#include "ofxEnveloper.h"
 
 
-ofxEnvRec::ofxEnvRec(float horizotalThreshold, float verticalThreshold):
+ofxEnveloper::ofxEnveloper(float horizotalThreshold, float verticalThreshold):
     mNumSteps(1),
     mHorizThreshold(horizotalThreshold),
     mVertThreshold(verticalThreshold),
@@ -20,42 +20,42 @@ ofxEnvRec::ofxEnvRec(float horizotalThreshold, float verticalThreshold):
 
 
 
-void ofxEnvRec::push_back(float x, float y)
+void ofxEnveloper::push_back(float x, float y)
 {
     mInterpolator.push_back(msa::Vec2f(x, y));
     
     mNumSteps = floor(sqrt(mInterpolator.size()));
 }
 
-int ofxEnvRec::size() const
+int ofxEnveloper::size() const
 {
     return mInterpolator.size();
 }
 
 
-void ofxEnvRec::clear()
+void ofxEnveloper::clear()
 {
     mInterpolator.clear();
     mNumSteps = 1;
 }
 
-void ofxEnvRec::drawGesture()
+void ofxEnveloper::drawGesture()
 {
     drawInterpolatorRaw(mInterpolator, 5, 4);
 }
 
-void ofxEnvRec::drawInterpolation()
+void ofxEnveloper::drawInterpolation()
 {
     drawInterpolatorSmooth(mInterpolator, mNumSteps, 20,  2) ;
 }
 
 
-ofxEnvRecEnvelope ofxEnvRec::getEnvelope()
+ofxEnveloperData ofxEnveloper::getEnvelope()
 {
  
     
     if(mInterpolator.size() == 0) {
-        return ofxEnvRecEnvelope(false); 
+        return ofxEnveloperData(false); 
     }
     
     float spacing = 1.0/mNumSteps; // good that mNumSteps is never 0, pfiuu!
@@ -73,15 +73,15 @@ ofxEnvRecEnvelope ofxEnvRec::getEnvelope()
     
     /* just press and release is not a valid gesture */
     if(samples.size() <= 2){
-        return ofxEnvRecEnvelope(false);
+        return ofxEnveloperData(false);
     }
     
-    ofxEnvRecEnvelope envelope(true); // the envelope to return
-    vector<ofxEnvRecEnvelope::Point> & envelopePoints = envelope.getPoints();
+    ofxEnveloperData envelope(true); // the envelope to return
+    vector<ofxEnveloperData::Point> & envelopePoints = envelope.getPoints();
     
     /* push the first sample in the envelope */
     const msa::Vec2f & firstSample = samples[0];
-    envelopePoints.push_back(ofxEnvRecEnvelope::Point(firstSample.x, firstSample.y));
+    envelopePoints.push_back(ofxEnveloperData::Point(firstSample.x, firstSample.y));
     mFirstHorizYCoord = firstSample.y;
     
     /* Now scan all the samples and keep track of the previous direction, namely the direction
@@ -100,7 +100,7 @@ ofxEnvRecEnvelope ofxEnvRec::getEnvelope()
         samples[1].x = samples[0].x;
     }else if(diff_x < 0){
         /* if the gesture goes backwards, return invalid envelope */
-        return ofxEnvRecEnvelope(false);
+        return ofxEnveloperData(false);
     }
     
     Direction prevDir = compare_dir(samples[0].x, samples[0].y, samples[1].x, samples[1].y);
@@ -116,7 +116,7 @@ ofxEnvRecEnvelope ofxEnvRec::getEnvelope()
             samples[i].x = samples[i-1].x;
         }else if( diff_x < 0){
             /* if the gesture goes backwards, return invalid envelope */
-            return ofxEnvRecEnvelope(false);
+            return ofxEnveloperData(false);
         }
         
         currentDir = compare_dir(samples[i-1].x, samples[i-1].y, samples[i].x, samples[i].y );
@@ -125,12 +125,12 @@ ofxEnvRecEnvelope ofxEnvRec::getEnvelope()
         if(currentDir != prevDir){
             
             if(prevDir == kDirHoriz){
-                envelopePoints.push_back( ofxEnvRecEnvelope::Point( samples[i-1].x, mFirstHorizYCoord) );
+                envelopePoints.push_back( ofxEnveloperData::Point( samples[i-1].x, mFirstHorizYCoord) );
             }else {
                 if(currentDir == kDirHoriz){
                     mFirstHorizYCoord = samples[i-1].y;
                 }
-                envelopePoints.push_back( ofxEnvRecEnvelope::Point( samples[i-1].x, samples[i-1].y) );
+                envelopePoints.push_back( ofxEnveloperData::Point( samples[i-1].x, samples[i-1].y) );
             }
             
             prevDir = currentDir;
@@ -144,7 +144,7 @@ ofxEnvRecEnvelope ofxEnvRec::getEnvelope()
     if(currentDir == kDirHoriz){
         lastSample.y = mFirstHorizYCoord;
     }
-    envelopePoints.push_back(ofxEnvRecEnvelope::Point(lastSample.x, samples[samples.size()-1].y));
+    envelopePoints.push_back(ofxEnveloperData::Point(lastSample.x, samples[samples.size()-1].y));
 
 
     return envelope;
