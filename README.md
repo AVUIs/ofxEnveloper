@@ -12,13 +12,15 @@ Compatibility: openFrameworks 0.9.0
 #How it works
 - Create an ofxEnveloper object, specifying pixel thesholds for detection of vertical and horizontal lines (default is 0).
 - While performing a gesture, points are added to the envelope recognition with the `push_back()` method.
-- Gesture and interpolation can be drawn while gesture is executed, using `drawGesture()` and `drawInterpolation()`. 
+- Gesture and interpolation can be drawn while gesture is executed, using `drawGesture()` and `drawInterpolation()` (*). 
 - Once a gesture is completed, the `getEnvelope()` method can be executed. 
 - The `getPoints()` method can then be used to retrieve the envelope points. 
 - A `scale()` method is provided by scaling an envelope from an ofRectangle object to another.
 - The `clear()` method clears the envelope recognition.
 
-ofxEnveloper relies on Memo Akten’s <a href="http://www.memo.tv/ofxmsainterpolator/">ofxMSAInterpolator</a>. Dependencies: <a href="https://github.com/memo/ofxMSACore">ofxMSACore</a> and <a href="https://github.com/memo/ofxMSAInterpolator">ofxMSAInterpolator</a>.
+(*) ofxEnveloper relies on Memo Akten’s <a href="http://www.memo.tv/ofxmsainterpolator/">ofxMSAInterpolator</a>. 
+
+Dependencies: <a href="https://github.com/memo/ofxMSACore">ofxMSACore</a> and <a href="https://github.com/memo/ofxMSAInterpolator">ofxMSAInterpolator</a>.
 
 #Examples
 The example-scaling illustrates how a gesture can result in a scaled envelope.
