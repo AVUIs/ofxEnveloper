@@ -1,5 +1,5 @@
 #ofxEnveloper
-ofxEnveloper converts gestures into an envelope type of graphical information, by recognising inflection points from the gesture. Thresholds for horizontal and vertical lines can also be defined. It is particularly aimed for animation and sound applications, and for use with drawing surfaces (such as Wacom tablets or touchscreen interfaces). 
+ofxEnveloper is an <a href="http://openframeworks.cc">openFrameworks</a> <a href="http://www.ofxaddons.com">addon</a> that converts gestures into an envelope type of graphical information, by recognising inflection points from the gesture. Thresholds for horizontal and vertical lines can also be defined. It is particularly aimed for animation and sound applications, and for use with drawing surfaces (such as Wacom tablets or touchscreen interfaces). 
 
 Possible uses:
 - audio effect or EQ envelopes;
